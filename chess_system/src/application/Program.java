@@ -1,7 +1,9 @@
 package application;
 
 import chess.ChessMatch;
+import chess.exceptions.ChessException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Program {
@@ -11,7 +13,18 @@ public class Program {
         ChessMatch chessMatch = new ChessMatch();
 
         while (true){
-        UI.printBoard(chessMatch.getPieces());
-        }
+           try {
+               UI.clearScreen();
+               UI.printBoard(chessMatch.getPieces());
+           }
+           catch (ChessException e) {
+            System.out.println(e.getMessage());
+            sc.nextLine();
+           }
+           catch (InputMismatchException e) {
+               System.out.println(e.getMessage());
+               sc.nextLine();
+           }
+           }
     }
 }
